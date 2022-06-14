@@ -38,7 +38,7 @@ security:
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^(?!/(login|register)), roles: ROLE_USER }
-        - { path: ^(/(login|register)), roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^(/(login|register|reset-password)), roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/, roles: IS_AUTHENTICATED_FULLY }
 
 when@test:
