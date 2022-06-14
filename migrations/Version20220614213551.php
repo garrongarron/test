@@ -26,7 +26,7 @@ final class Version20220614213551 extends AbstractMigration
         $this->addSql('COMMENT ON COLUMN reset_password_request.requested_at IS \'(DC2Type:datetime_immutable)\'');
         $this->addSql('COMMENT ON COLUMN reset_password_request.expires_at IS \'(DC2Type:datetime_immutable)\'');
         $this->addSql('ALTER TABLE reset_password_request ADD CONSTRAINT FK_7CE748AA76ED395 FOREIGN KEY (user_id) REFERENCES "user" (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
-        $this->addSql('ALTER TABLE "user" ALTER is_verified SET NOT NULL');
+        // $this->addSql('ALTER TABLE "user" ALTER is_verified SET NOT NULL');
     }
 
     public function down(Schema $schema): void
@@ -35,6 +35,6 @@ final class Version20220614213551 extends AbstractMigration
         $this->addSql('CREATE SCHEMA public');
         $this->addSql('DROP SEQUENCE reset_password_request_id_seq CASCADE');
         $this->addSql('DROP TABLE reset_password_request');
-        $this->addSql('ALTER TABLE "user" ALTER is_verified DROP NOT NULL');
+        // $this->addSql('ALTER TABLE "user" ALTER is_verified DROP NOT NULL');
     }
 }
