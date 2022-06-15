@@ -31,12 +31,56 @@ class AppController extends AbstractController
     /**
      * @Route("/", name="home")
      */
-    public function number(): Response
+    public function home(): Response
     {
-        $number = random_int(0, 10);
+        return $this->render('main/index.html.twig', []);
+    }
 
-        return new Response(
-            '<html><body>Lucky number: '.$number.'</body></html>'
-        );
+    /**
+     * @Route("/nosotros", name="nosotros")
+     */
+    public function nosotros(): Response
+    {
+        return $this->render('main/nosotros.html.twig', []);
+    }
+    
+    /**
+     * @Route("/cursos", name="cursos")
+     */
+    public function cursos(): Response
+    {
+        return $this->render('main/cursos.html.twig', []);
+    }
+
+    /**
+     * @Route("/equipo", name="equipo")
+     */
+    public function equipo(): Response
+    {
+        return $this->render('main/equipo.html.twig', []);
+    }
+
+    /**
+     * @Route("/blog", name="blog")
+     */
+    public function blog(): Response
+    {
+        return $this->render('main/blog.html.twig', []);
+    }
+
+    /**
+     * @Route("/detail", name="detail")
+     */
+    public function detail(): Response
+    {
+        return $this->render('main/blog-single.html.twig', []);
+    }
+
+    /**
+     * @Route("/contacto", name="contact")
+     */
+    public function contacto(): Response
+    {
+        return $this->render('main/contacto.html.twig', []);
     }
 }

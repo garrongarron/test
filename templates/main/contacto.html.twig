@@ -1,0 +1,34 @@
+{% extends 'main/main.html.twig' %}
+
+{% block body %}
+
+{% include 'main/Header.html.twig' %}
+{# {% include 'main/BlogList.html.twig' %} #}
+
+    <!-- Contact Start -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            <div class="text-center mb-5">
+                <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">Contact</h5>
+                <h1>Contact For Any Query</h1>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    {% include 'main/Comment.html.twig' %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Contact End -->
+{# {% include 'main/Detail.html.twig' %} #}
+{# {% include 'main/About.html.twig' %} #}
+{# {% include 'main/Category.html.twig' %} #}
+{# {% include 'main/Courses.html.twig' %} #}
+{# {% include 'main/Registration.html.twig' %} #}
+{# {% include 'main/Team.html.twig' %} #}
+{# {% include 'main/Testimonial.html.twig' %} #}
+{# {% include 'main/Blog.html.twig' %} #}
+{% include 'main/Footer.html.twig' %}
+
+
+{% endblock %}
