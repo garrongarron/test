@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Service\Categories;
+use App\Service\Courses;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -32,10 +33,11 @@ class AppController extends AbstractController
     /**
      * @Route("/", name="home")
      */
-    public function home(Categories $categories): Response
+    public function home(Categories $categories, Courses $courses): Response
     {
         return $this->render('main/index.html.twig', [
-            'categories' => $categories->getCategory()
+            'categories' => $categories->getCategory(),
+            'courses' => $courses->getCourses()
         ]);
     }
 
@@ -50,10 +52,11 @@ class AppController extends AbstractController
     /**
      * @Route("/cursos", name="cursos")
      */
-    public function cursos(Categories $categories): Response
+    public function cursos(Categories $categories, Courses $courses): Response
     {
         return $this->render('main/cursos.html.twig', [
-            'categories' => $categories->getCategory()
+            'categories' => $categories->getCategory(),
+            'courses' => $courses->getCourses()
         ]);
     }
 
