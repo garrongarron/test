@@ -39,6 +39,8 @@ security:
         - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^(?!/(login|register)), roles: ROLE_USER }
         - { path: ^(/(login|register|reset-password)), roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/course, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/, roles: IS_AUTHENTICATED_FULLY }
 
 when@test:

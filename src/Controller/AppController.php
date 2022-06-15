@@ -21,7 +21,7 @@ class AppController extends AbstractController
 
 
     /**
-     * @Route("/not-the-homepage", name="alternate_page")
+     * @Route("/course/landing", name="alternate_page")
      */
     public function alternatePage(): Response
     {
