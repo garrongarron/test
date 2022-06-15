@@ -37,11 +37,11 @@ class AppController extends AbstractController
     }
 
     /**
-     * @Route("/nosotros", name="nosotros")
+     * @Route("/e-learning", name="learning")
      */
-    public function nosotros(): Response
+    public function learning(): Response
     {
-        return $this->render('main/nosotros.html.twig', []);
+        return $this->render('main/learning.html.twig', []);
     }
     
     /**
