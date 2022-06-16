@@ -6,9 +6,12 @@ class NodeBuilder {
         this.nodehandler = nodehandler
         this.currentType = 'p'
     }
+    delete(index){
+        this.nodehandler.container.children[index].remove()
+    }
     update(data) {
         data.forEach((element, index) => {
-            if (JSON.stringify(this.prevData[index]) != JSON.stringify(data[index])) {
+            if (JSON.stringify(data[index]) != JSON.stringify(this.prevData[index])) {
                 let node
                 if (this.tagList.includes(element.tag)) {
                     node = this.tagFormater(element)

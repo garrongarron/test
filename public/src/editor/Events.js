@@ -10,11 +10,19 @@ class Events {
     start() {
         this.edit()
         this.duplicate()
+        this.delete()
         this.clickOnNode()
         this.nodeTypeButtons()
         this.imageLoader()
 
         this.updateNode()
+    }
+    delete() {
+        document.querySelector('.ui-editor [value="Delete"]')
+            .addEventListener('click', () => {
+                const bool = persistence.delete(this.nodeHandler.getIndex())
+                if(bool) this.nodeBuilder.delete(this.nodeHandler.getIndex())
+            })
     }
     edit() {
         document.querySelector('.ui-editor textarea')
@@ -36,6 +44,7 @@ class Events {
     clickOnNode() {
         eventBus.subscribe('click.on.node', (text) => {
             document.querySelector('.ui-editor textarea').value = text
+            this.nodeBuilder.currentType = persistence.database[this.nodeHandler.getIndex()].tag
         })
     }
     updateNode() {
@@ -60,8 +69,9 @@ class Events {
         imageLoader.callback = (blob) => {
             this.duplicate()
             this.nodeHandler.setIndex(this.nodeHandler.getIndex() + 1)
+            this.nodeBuilder.currentType = 'img'
             persistence.insert(this.nodeHandler.getIndex(), {
-                tag: 'img',
+                tag: this.nodeBuilder.currentType,
                 inner: blob,
             })
             this.nodeBuilder.update(persistence.database)
