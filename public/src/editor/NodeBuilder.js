@@ -5,8 +5,9 @@ class NodeBuilder {
         this.prevData = []
         this.nodehandler = nodehandler
         this.currentType = 'p'
+        this.MDconverter = new Showdown.converter();
     }
-    delete(index){
+    delete(index) {
         this.nodehandler.container.children[index].remove()
     }
     update(data) {
@@ -19,6 +20,8 @@ class NodeBuilder {
                     node = this.codeFormater(element)
                 } else if (element.tag == 'img') {
                     node = this.imgFormater(element)
+                } else if (element.tag == 'md') {
+                    node = this.markDownFormater(element)
                 } else {
                     node = this.build(element.tag, element.inner, element.className, element.parent)
                 }
@@ -31,6 +34,12 @@ class NodeBuilder {
         });
         this.prevData = data.map(el => el)
         Prism.highlightAll();
+    }
+    markDownFormater(element) {
+        const node = this.build('div')
+        var html = this.MDconverter.makeHtml(element.inner);
+        node.innerHTML = html
+        return node
     }
     tagFormater(element) {
         return this.build(element.tag, element.inner, element.className, element.parent)

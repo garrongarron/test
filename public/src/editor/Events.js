@@ -15,11 +15,29 @@ class Events {
         this.delete()
         this.clickOnNode()
         this.nodeTypeButtons()
+        this.markDownMaker()
         this.imageLoader()
         this.exportJson()
         this.importJson(this.nodeHandler)
         this.lineNumber()
         this.updateNode()
+    }
+    markDownMaker(){
+        document.querySelector('.ui-editor [value="md"]').addEventListener('click', () => {
+            this.nodeBuilder.currentType = 'md'
+            this.updateNode()
+        })
+    }
+    nodeTypeButtons() {
+        const types = 'h1 h2 p html css js'.split(' ')
+        types.forEach(type => {
+            document.querySelector('.ui-editor [value="' + type + '"]')
+                .addEventListener('click', (e) => {
+                    this.nodeBuilder.currentType = type == 'js' ? 'javascript' : type
+                    this.updateNode()
+                })
+        })
+
     }
     lineNumber() {
         const eventHandler = (e) => {
@@ -73,17 +91,7 @@ class Events {
         })
     }
 
-    nodeTypeButtons() {
-        const types = 'h1 h2 p html css js'.split(' ')
-        types.forEach(type => {
-            document.querySelector('.ui-editor [value="' + type + '"]')
-                .addEventListener('click', (e) => {
-                    this.nodeBuilder.currentType = type == 'js' ? 'javascript' : type
-                    this.updateNode()
-                })
-        })
-
-    }
+    
     imageLoader() {
         imageLoader.callback = (blob) => {
             this.duplicate()
