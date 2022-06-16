@@ -85,6 +85,14 @@ class AppController extends AbstractController
     }
 
     /**
+     * @Route("/editor", name="editor")
+     */
+    public function editor(): Response
+    {
+        return $this->render('main/editor.html.twig', []);
+    }
+
+    /**
      * @Route("/contacto", name="contact")
      */
     public function contacto(): Response
