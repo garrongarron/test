@@ -1,5 +1,7 @@
 import eventBus from "../EventBus.js";
+import exportFile from "./ExportFile.js";
 import imageLoader from "./ImageLoader.js";
+import importFile from "./ImportFile.js";
 import persistence from "./Persistence.js";
 
 class Events {
@@ -14,6 +16,8 @@ class Events {
         this.clickOnNode()
         this.nodeTypeButtons()
         this.imageLoader()
+        this.exportJson()
+        this.importJson(this.nodeHandler)
 
         this.updateNode()
     }
@@ -21,7 +25,7 @@ class Events {
         document.querySelector('.ui-editor [value="Delete"]')
             .addEventListener('click', () => {
                 const bool = persistence.delete(this.nodeHandler.getIndex())
-                if(bool) this.nodeBuilder.delete(this.nodeHandler.getIndex())
+                if (bool) this.nodeBuilder.delete(this.nodeHandler.getIndex())
             })
     }
     edit() {
@@ -76,11 +80,33 @@ class Events {
             })
             this.nodeBuilder.update(persistence.database)
         }
-        document.querySelector('.ui-editor [type="file"]').addEventListener('change', (e) => {
+        document.querySelector('.ui-editor [accept="image/png, image/jpeg"]').addEventListener('change', (e) => {
             imageLoader.upload(e)
         })
         document.querySelector('.ui-editor [value="ImgUp"]').addEventListener('click', () => {
-            document.querySelector('.ui-editor [type="file"]').click()
+            document.querySelector('.ui-editor [accept="image/png, image/jpeg"]').click()
+        })
+    }
+
+    exportJson() {
+        document.querySelector('.ui-editor [value="Download_Json"]').addEventListener('click', () => {
+            exportFile.download(JSON.stringify(persistence.database))
+        })
+    }
+    importJson(nodehandler) {
+        const children = nodehandler.container.children
+        importFile.callback = (text) => {
+            persistence.database = JSON.parse(text)
+            for (var i = 0; i < children.length; i++) {
+                children[i].remove();
+            }
+            this.nodeBuilder.update(persistence.database)
+        }
+        document.querySelector('.ui-editor [accept="application/JSON"]').addEventListener('change', (e) => {
+            importFile.upload(e)
+        })
+        document.querySelector('.ui-editor [value="Upload_Json"]').addEventListener('click', (e) => {
+            document.querySelector('.ui-editor [accept="application/JSON"]').click()
         })
     }
 }
