@@ -15,9 +15,9 @@ class NodeHandler {
         return this.container.children[this.index]
     }
     setIndex(index) {
-        if (this.index != null) this.currentNode().classList.remove('node-selected')
+        if (this.index != null) this.currentNode()?.classList.remove('node-selected')
         this.index = index
-        this.currentNode().classList.add('node-selected')
+        this.currentNode()?.classList.add('node-selected')
     }
     // insertAfter(newNode, existingNode) {
     //     existingNode.parentNode.insertBefore(newNode, existingNode.nextSibling);

@@ -10,15 +10,17 @@ class NodeBuilder {
         data.forEach((element, index) => {
             if (JSON.stringify(this.prevData[index]) != JSON.stringify(data[index])) {
                 let node
-                if (this.styleList.includes(element.tag)) {
+                if (this.tagList.includes(element.tag)) {
+                    node = this.tagFormater(element)
+                } else if (this.styleList.includes(element.tag)) {
                     node = this.codeFormater(element)
+                } else if (element.tag == 'img') {
+                    node = this.imgFormater(element)
                 } else {
                     node = this.build(element.tag, element.inner, element.className, element.parent)
                 }
-                node.addEventListener('click', () => {
-                    this.currentType = element.tag
-                    this.nodehandler.setClickOnNode(node, element.inner)
-                })
+                this.currentType = element.tag
+                this.nodehandler.setClickOnNode(node, element.inner)
                 this.nodehandler.container.children.hasOwnProperty(index)
                     ? this.nodehandler.remplaceNode(node, index)
                     : this.nodehandler.container.appendChild(node)
@@ -26,6 +28,9 @@ class NodeBuilder {
         });
         this.prevData = data.map(el => el)
         Prism.highlightAll();
+    }
+    tagFormater(element) {
+        return this.build(element.tag, element.inner, element.className, element.parent)
     }
     codeFormater(data) {
         const node = this.build('pre', null, 'language-' + data.tag)
@@ -37,6 +42,14 @@ class NodeBuilder {
         }
         this.build('code', data.inner, null, node)
         return node
+    }
+    imgFormater(data) {
+        const imgContainer = this.build('div')
+        imgContainer.classList.add('image-container')
+        const node = this.build(data.tag, null, null, imgContainer)
+        node.setAttribute('src', data.inner)
+        node.setAttribute('title', 'Ilustration')
+        return imgContainer
     }
 
     build(tag, inner, className, parent) {

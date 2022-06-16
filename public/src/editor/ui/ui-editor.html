@@ -10,6 +10,7 @@
         <input type="button" value="css">
         <input type="button" value="js">
         <input type="button" value="ImgUp">
+        <input type="file" accept="image/png, image/jpeg" style="display:none">
         <input type="button" value="-">
         <input type="button" value="--">
         <input type="number" class="lineNumber" type="number" placeholder="Line number">
@@ -40,7 +41,8 @@
         background-color: rgba(255, 255, 255, .8);
     }
 
-    input {
+    .ui-editor input[type="button"],
+    .ui-editor input[type="number"] {
         display: inline-block;
     }
 
@@ -52,5 +54,20 @@
         position: absolute;
         margin-left: -50px;
         background-color: red;
+    }
+
+    /*IMAGE FORMATER*/
+    .image-container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        background-color: white;
+        padding: 1em;
+    }
+
+    img {
+        max-width: 100%;
+        object-fit: cover;
+        box-shadow: 2px 2px 8px black;
     }
 </style>
