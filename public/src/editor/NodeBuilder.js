@@ -36,6 +36,7 @@ class NodeBuilder {
         return this.build(element.tag, element.inner, element.className, element.parent)
     }
     codeFormater(data) {
+        console.log(data);
         const node = this.build('pre', null, 'language-' + data.tag)
         if (data.lineNumber !== '' && Number.isInteger(data.lineNumber * 1)) {
             node.classList.add('line-numbers')
@@ -44,6 +45,7 @@ class NodeBuilder {
             if (typeof data.lineNumber != undefined) delete data.lineNumber
         }
         this.build('code', data.inner, null, node)
+        console.log('=>', node.innHTML);
         return node
     }
     imgFormater(data) {
