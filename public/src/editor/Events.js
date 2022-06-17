@@ -21,15 +21,65 @@ class Events {
         this.importJson(this.nodeHandler)
         this.lineNumber()
         this.updateNode()
+        this.save()
+        this.loadData()
     }
-    markDownMaker(){
+    loadData() {
+        const filename = location.pathname.replace('/editor/', '')
+        fetch('/api/files/' + filename)
+            .then(response => response.json())
+            .then(data => {
+                if (data.length === 0) return
+                persistence.database = data
+                this.nodeBuilder.update(persistence.database)
+                this.nodeHandler.setIndex(0)
+
+            });
+        fetch('/api/files')
+            .then(response => response.json())
+            .then(data => {
+                data = data.map(element => {
+                    return `
+                    <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                        <a href="/editor/${element}" class="text-decoration-none h6 m-0">${element}</a>
+                        <span class="badge badge-primary badge-pill">150</span>
+                    </li>`
+                });
+                
+                document.querySelector(".list-group.list-group-flush").innerHTML = data.join('\n')
+            });
+    }
+    save() {
+        const filename = location.pathname.replace('/editor/', '')
+        document.querySelector('.ui-editor [value="save"]').addEventListener('click', () => {
+            // Simple POST request with a JSON body using fetch
+            const requestOptions = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    fileName: filename,
+                    json: persistence.database
+                })
+            };
+            fetch('/api/files', requestOptions)
+                .then(response => response.json())
+                .then(data => {
+                    if (data === true) {
+                        alert("Guardado con exito")
+                    } else {
+                        alert("Error al guardar")
+                    }
+                });
+        })
+    }
+    markDownMaker() {
         document.querySelector('.ui-editor [value="md"]').addEventListener('click', () => {
             this.nodeBuilder.currentType = 'md'
             this.updateNode()
         })
     }
     nodeTypeButtons() {
-        const types = 'h1 h2 p html css js'.split(' ')
+        const types = 'h1 h2 p html css js gdscript'.split(' ')
         types.forEach(type => {
             document.querySelector('.ui-editor [value="' + type + '"]')
                 .addEventListener('click', (e) => {
@@ -72,13 +122,13 @@ class Events {
         }
         const lineNumber = persistence.database[this.nodeHandler.getIndex()]?.lineNumber
         if (lineNumber) data.lineNumber = lineNumber
-        persistence.update(this.nodeHandler.getIndex(),data)
+        persistence.update(this.nodeHandler.getIndex(), data)
         this.nodeBuilder.update(persistence.database)
     }
     duplicate() {
         document.querySelector('.ui-editor [value="Duplicate"]')
             .addEventListener('click', () => {
-                const clone = Object.assign({},persistence.database[this.nodeHandler.getIndex()]);
+                const clone = Object.assign({}, persistence.database[this.nodeHandler.getIndex()]);
                 persistence.insert(this.nodeHandler.getIndex(), clone)
                 this.nodeBuilder.update(persistence.database)
                 this.nodeHandler.setIndex(this.nodeHandler.getIndex() + 1)
@@ -91,7 +141,7 @@ class Events {
         })
     }
 
-    
+
     imageLoader() {
         imageLoader.callback = (blob) => {
             this.duplicate()
