@@ -7,7 +7,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
-    {% if app.request.server.get('APP_ENV') == 'PROD' %}<base href="{{ absolute_url('/')|replace({'http:': 'https:'})}}" >
+    {% if app.request.server.get('APP_ENV') == 'PROD' %}<base href="{{ absolute_url('/')|replace({'http': 'https'})}}" >
     {% else %}<base href="{{ absolute_url('/')}}" >{% endif %}
     
 
