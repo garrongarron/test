@@ -22,7 +22,7 @@ class Events {
         this.lineNumber()
         this.updateNode()
         this.save()
-        this.loadData()
+        //this.loadData()
     }
     loadData() {
         const filename = location.pathname.replace('/editor/', '')
