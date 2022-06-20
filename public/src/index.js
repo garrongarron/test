@@ -1,3 +1,5 @@
 import init from "./editor/Init.js";
 
-init()
+if (location.href == 'http://localhost:8080/'){
+    init()   
+}
