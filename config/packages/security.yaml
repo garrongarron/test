@@ -36,12 +36,12 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/admin, roles: ROLE_ADMIN,  requires_channel: '%env(SECURE_SCHEME)%' }
         # - { path: ^(?!/(login|register)), roles: ROLE_USER }
-        - { path: ^(/(login|register|reset-password)), roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/course, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^(/(login|register|reset-password)), roles: IS_AUTHENTICATED_ANONYMOUSLY,  requires_channel: '%env(SECURE_SCHEME)%' }
+        - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY,  requires_channel: '%env(SECURE_SCHEME)%'}
+        - { path: ^/course, roles: IS_AUTHENTICATED_ANONYMOUSLY,  requires_channel: '%env(SECURE_SCHEME)%' }
+        - { path: ^/, roles: IS_AUTHENTICATED_FULLY,  requires_channel: '%env(SECURE_SCHEME)%' }
 
 when@test:
     security:

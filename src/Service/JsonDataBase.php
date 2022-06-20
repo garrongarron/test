@@ -21,6 +21,9 @@ class JsonDataBase
         while ($name = readdir($handle)) {
             $files[] = "$name";
         }
+        sort($files);
+        array_shift($files);
+        array_shift($files);
         closedir($handle);
         return $files;
     }

@@ -6,7 +6,24 @@
     <script src="js/prism.js"></script>
     <script src="js/line-number.js"></script>
     <script src="js/showdown.js"></script>
+    <style>
+    #container .image-container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        background-color: white;
+        padding: 1em;
+    }
 
+    #container img {
+        max-width: 100%;
+        object-fit: cover;
+        box-shadow: 2px 2px 8px black;
+    }
+    #container > *{
+        text-align: justify;
+    }
+    </style>
 
     <script src="src/index.js" type="module"></script>
     <div class="container-fluid py-5">
