@@ -79,7 +79,7 @@ class Events {
         })
     }
     nodeTypeButtons() {
-        const types = 'h1 h2 p html css js gdscript'.split(' ')
+        const types = 'h1 h2 p html css js gdscript csharp'.split(' ')
         types.forEach(type => {
             document.querySelector('.ui-editor [value="' + type + '"]')
                 .addEventListener('click', (e) => {

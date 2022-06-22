@@ -1,7 +1,7 @@
 class NodeBuilder {
     constructor(nodehandler) {
         this.tagList = ['h1', 'h2', 'p']
-        this.styleList = ['html', 'javascript', 'css', 'gdscript']
+        this.styleList = ['html', 'javascript', 'css', 'gdscript', 'csharp']
         this.prevData = []
         this.nodehandler = nodehandler
         this.currentType = 'p'
