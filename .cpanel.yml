@@ -1,5 +1,5 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/desarrol/public_html/
+    - export DEPLOYPATH=/home2/desarrol/public_html/
     - /bin/cp -R ./public/index.php $DEPLOYPATH
