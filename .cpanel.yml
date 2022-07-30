@@ -2,4 +2,4 @@
 deployment:
   tasks:
     - export DEPLOYPATH=/home2/desarrol/public_html/
-    - /bin/cp -R ./public/index.php $DEPLOYPATH
+    - /bin/cp ./public/cpanel.php /home2/desarrol/public_html/index.php
