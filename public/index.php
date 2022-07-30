@@ -1,5 +1,5 @@
 <?php
-
+echo dirname(__DIR__); exit;
 use App\Kernel;
 
 require_once dirname(__DIR__).'/vendor/autoload_runtime.php';
