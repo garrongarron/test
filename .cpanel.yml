@@ -2,5 +2,4 @@
 deployment:
   tasks:
     - export DEPLOYPATH=/home2/desarrol/public_html/
-    - /bin/cp -R public $DEPLOYPATH
-    - /bin/cp /home2/desarrol/env/env_vars .env
+    - /bin/rm .env
